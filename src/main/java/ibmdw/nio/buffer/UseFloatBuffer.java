@@ -1,0 +1,28 @@
+package ibmdw.nio.buffer;
+
+import java.nio.FloatBuffer;
+
+/**
+ * User: 智深
+ * Date-Time: 2013-04-17
+ */
+public class UseFloatBuffer {
+    static public void main(String args[]) throws Exception {
+        // 创建FloatBuffer，容量10,单位 float，也就是说创建的 buffer 放的下10个 float
+        FloatBuffer buffer = FloatBuffer.allocate(10);
+
+        for (int i = 0; i < buffer.capacity(); ++i) {
+            float f = (float) Math.sin((((float) i) / 10) * (2 * Math.PI));
+            // position ++
+            buffer.put(f);
+        }
+        // position = 0
+        buffer.flip();
+
+        while (buffer.hasRemaining()) {
+            // position ++
+            float f = buffer.get();
+            System.out.println(f);
+        }
+    }
+}
